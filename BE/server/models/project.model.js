@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import shortId from "shortid";
 
-const shortUrlSchema = new mongoose.Schema(
+const projectSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -18,4 +18,4 @@ const shortUrlSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("ShortUrl", shortUrlSchema);
+export default mongoose.model("projects", projectSchema);

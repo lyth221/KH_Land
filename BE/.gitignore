@@ -1,0 +1,8 @@
+node_modules
+certs/*
+ecosystem.config.js
+logs
+certs_
+yarn.lock
+.env
+dist

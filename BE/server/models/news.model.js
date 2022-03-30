@@ -37,6 +37,10 @@ const newsSchema = new mongoose.Schema(
     project: {
       type: Array,
     },
+    imageThumbnail: {
+      type: Object,
+      default: null,
+    },
   },
   {
     timestamps: true,
