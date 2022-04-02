@@ -3,7 +3,7 @@ networks:
   khland:
 
 services:
-  wbc_mongo:
+  khland_mongo:
     image: "mongo:4.2.3-bionic"
     container_name: khland_mongo
     ports:
@@ -12,7 +12,7 @@ services:
       - ./database/mongodb:/data/db
     networks:
       - khland
-  wbc_server_be:
+  khland_server:
     build:
       context: ./docker/api
       dockerfile: Dockerfile
