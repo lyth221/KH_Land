@@ -1,0 +1,33 @@
+version: "3"
+networks:
+  khland:
+
+services:
+  wbc_mongo:
+    image: "mongo:4.2.3-bionic"
+    container_name: khland_mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./database/mongodb:/data/db
+    networks:
+      - khland
+  wbc_server_be:
+    build:
+      context: ./docker/api
+      dockerfile: Dockerfile
+    container_name: khland_server
+    working_dir: /var/www
+    ports:
+      - 8000:8000
+    depends_on:
+      - khland_mongo
+    volumes:
+      - .:/var/www
+    command: /bin/sh -c "${START_COMMAND}"
+    networks:
+      - khland
+
+volumes:
+  dbdata:
+    driver: local
