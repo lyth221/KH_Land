@@ -31,15 +31,11 @@ const newsSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    image: {
-      type: Array,
-    },
     project: {
-      type: Array,
+      type: String,
     },
     imageThumbnail: {
-      type: Object,
-      default: null,
+      type: String,
     },
   },
   {

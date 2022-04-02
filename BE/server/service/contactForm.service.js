@@ -10,10 +10,10 @@ const createFormContact = async (data) => {
   }
 };
 
-const getFormContactById = async (newsId) => {
+const getFormContactById = async (contactFormId) => {
   try {
     const result = await contactFormModel.findOne({
-      contactFormId: contactFormId,
+      _id: contactFormId,
     });
     return result;
   } catch (error) {
@@ -25,9 +25,21 @@ const getListContactForm = async (params) => {
   try {
     const skip = (parseInt(params.page) - 1) * parseInt(params.size);
     const result = await contactFormModel
-      .find({ category: params.category })
+      .find({})
       .skip(skip)
       .limit(parseInt(params.size));
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const updateStatusContactFormById = async (contactFormId) => {
+  try {
+    const result = contactFormModel.updateOne(
+      { _id: contactFormId },
+      { isSolved: true }
+    );
     return result;
   } catch (error) {
     throw error;
@@ -38,4 +50,5 @@ export default {
   createFormContact,
   getFormContactById,
   getListContactForm,
+  updateStatusContactFormById,
 };
