@@ -14,17 +14,17 @@ export default [
         permissions: ['admin', 'editor'],
         navLink: '/pages/blog/list'
       },
-      {
-        id: 'blogDetail',
-        title: 'Detail',
-        permissions: ['admin', 'editor'],
-        navLink: '/pages/blog/detail'
-      },
+      // {
+      //   id: 'blogDetail',
+      //   title: 'Detail',
+      //   permissions: ['admin', 'editor'],
+      //   navLink: '/pages/blog/detail'
+      // },
       {
         id: 'blogEdit',
-        title: 'Edit',
+        title: 'Create',
         permissions: ['admin', 'editor'],
-        navLink: '/pages/blog/edit'
+        navLink: '/pages/blog/create'
       }
     ]
   }

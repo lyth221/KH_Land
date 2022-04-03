@@ -5,8 +5,8 @@ const data = {
   users: [
     {
       id: 1,
-      fullName: 'John Doe',
-      username: 'johndoe',
+      fullName: 'Kim Hồng',
+      username: 'kimhong',
       password: 'admin',
       avatar: require('@src/assets/images/portrait/small/avatar-s-11.jpg').default,
       email: 'admin@demo.com',

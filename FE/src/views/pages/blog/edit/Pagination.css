@@ -1,0 +1,62 @@
+.selectRow{
+    background: #e5f4eb;
+    border: none;
+    color: #4fb778;
+    font-weight: 700;
+    height: 35px;
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.Table__itemCount {
+  /* margin-top: 10px; */
+  font-size: 14px;
+}
+
+.Table__pagination {
+  display: flex;
+  justify-content: center;
+  padding: 20px 10px;
+  background-color: white;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.Table__pageButton {
+  font-size: 15px;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  background:rgba(79, 183, 121, 0.15) 0% 0% no-repeat padding-box;
+  border: none;
+  border-radius: 5px;
+  height: 35px;
+  min-width: 35px;
+  font-weight: bold;
+  color: #54b862;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.Table__pageButton:disabled {
+  cursor: not-allowed;
+  color: #737070;
+  background-color: #f7f7f7;
+  font-weight: normal;
+}
+
+.Table__pageButton--active {
+  background: #54b862;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 0.25rem 0.55rem rgb(82 180 122 / 35%);
+}
+.Table__visiblePagesWrapper{
+    /* background-color: rgba(79, 183, 121, 0.15); */
+    border-radius: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+/* .dropdown-page{
+  width: 50px !important;
+} */
+button:focus {outline:0;}
