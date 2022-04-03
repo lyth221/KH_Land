@@ -1,0 +1,30 @@
+# Node packages
+node_modules
+
+# Dockerfile
+Dockerfile*
+
+.dockerignore
+
+# git related folder
+.git
+.gitignore
+
+# Execute file
+*.sh
+
+# Other file
+README.md
+LICENSE
+
+# Visual code settings
+.vscode
+
+# Log file
+logs
+
+# environment file
+.env*
+
+# built files
+dist

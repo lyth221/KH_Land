@@ -9,6 +9,6 @@ router.route("/news/list").get(newsController.getListNewsByCategory);
 
 router.route("/news/:id").get(newsController.getNewsById);
 
-router.route("/news/id").put(newsController.updateNewsById);
+router.route("/news/:id").put(newsController.updateNewsById);
 
 export default router;
