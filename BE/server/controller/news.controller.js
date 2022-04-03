@@ -2,7 +2,6 @@ import newsService from "../service/news.service.js";
 
 const createNews = async (req, res) => {
   try {
-    console.log("body full", req.body);
     const data = req.body;
     const result = await newsService.createNews(data);
     if (result) {
@@ -57,7 +56,6 @@ const getNewsById = async (req, res) => {
 const getListNewsByCategory = async (req, res) => {
   try {
     const params = {
-      category: req.query.category,
       page: req.query.page || 1,
       size: req.query.size || 10,
     };

@@ -3,7 +3,6 @@ import newsModel from "../models/news.model.js";
 const createNews = async (data) => {
   try {
     const result = await newsModel.create(data);
-    console.log("result", result);
     return result;
   } catch (error) {
     throw error;
@@ -22,11 +21,15 @@ const getNewsById = async (newsId) => {
 const getListNewsByCategory = async (params) => {
   try {
     const skip = (parseInt(params.page) - 1) * parseInt(params.size);
+    const total = await newsModel.count();
     const result = await newsModel
-      .find({ category: params.category })
+      .find()
       .skip(skip)
       .limit(parseInt(params.size));
-    return result;
+    return {
+      result,
+      total,
+    };
   } catch (error) {
     throw error;
   }

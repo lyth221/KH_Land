@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import v1 from "./routes/v1/index.js";
 import morgan from "morgan";
 import dotenv from "dotenv";
+import cors from "cors";
+
 dotenv.config();
 
 const app = new Express();
@@ -13,6 +15,7 @@ mongoose.connect("mongodb://localhost/KH_LAND", {
 });
 
 app.use(morgan("dev"));
+app.use(cors());
 app.set("view engine", "ejs");
 app.use(Express.json({ limit: "20mb" }));
 app.use(Express.urlencoded({ limit: "20mb", extended: false }));
