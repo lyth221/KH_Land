@@ -25,7 +25,8 @@ const getListNewsByCategory = async (params) => {
     const result = await newsModel
       .find()
       .skip(skip)
-      .limit(parseInt(params.size));
+      .limit(parseInt(params.size))
+      .sort({ createdAt: -1 });
     return {
       result,
       total,
@@ -35,8 +36,17 @@ const getListNewsByCategory = async (params) => {
   }
 };
 
+const updateNewsById = async (newsId, dataUpdate) => {
+  try {
+    const result = await newsModel.updateOne({ newsId: newsId }, dataUpdate);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
 export default {
   createNews,
   getNewsById,
   getListNewsByCategory,
+  updateNewsById,
 };

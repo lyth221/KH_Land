@@ -24,11 +24,16 @@ const getFormContactById = async (contactFormId) => {
 const getListContactForm = async (params) => {
   try {
     const skip = (parseInt(params.page) - 1) * parseInt(params.size);
+    const total = await contactFormModel.count();
     const result = await contactFormModel
       .find({})
       .skip(skip)
-      .limit(parseInt(params.size));
-    return result;
+      .limit(parseInt(params.size))
+      .sort({ createdAt: -1 });
+    return {
+      result,
+      total,
+    };
   } catch (error) {
     throw error;
   }

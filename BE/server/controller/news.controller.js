@@ -78,7 +78,23 @@ const getListNewsByCategory = async (req, res) => {
 
 const updateNewsById = async (req, res) => {
   try {
-  } catch (error) {}
+    const dataUpdate = req.body;
+    const newsId = req.params.id;
+    const result = await newsService.updateNewsById(newsId, dataUpdate);
+    if (result) {
+      return res.status(200).send({
+        success: "successful",
+        errorCode: 1,
+        result: result,
+      });
+    }
+  } catch (error) {
+    return res.status(500).send({
+      success: "false",
+      errorCode: 0,
+      result: null,
+    });
+  }
 };
 
 export default {
