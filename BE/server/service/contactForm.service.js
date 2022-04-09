@@ -26,7 +26,7 @@ const getListContactForm = async (params) => {
     const skip = (parseInt(params.page) - 1) * parseInt(params.size);
     const total = await contactFormModel.count();
     const result = await contactFormModel
-      .find({})
+      .find({ isSolved: false })
       .skip(skip)
       .limit(parseInt(params.size))
       .sort({ createdAt: -1 });
@@ -41,10 +41,12 @@ const getListContactForm = async (params) => {
 
 const updateStatusContactFormById = async (contactFormId) => {
   try {
-    const result = contactFormModel.updateOne(
+    console.log("đâsdas", contactFormId);
+    const result = await contactFormModel.updateOne(
       { _id: contactFormId },
       { isSolved: true }
     );
+    console.log("result", result);
     return result;
   } catch (error) {
     throw error;

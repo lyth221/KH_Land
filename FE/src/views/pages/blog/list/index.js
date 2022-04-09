@@ -37,7 +37,7 @@ const BlogList = () => {
 
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(5);
-  const [totalPage, setTotal] = useState(0)
+  const [totalPage, setTotal] = useState(0);
 
   const history = useHistory();
 
@@ -52,8 +52,7 @@ const BlogList = () => {
   useEffect(() => {
     axios
       .get(
-        "http://192.168.123.193:8080" +
-          `/api/v1/news/list?page=${page}&&size=${size}`
+        "http://localhost:8080" + `/api/v1/news/list?page=${page}&&size=${size}`
       )
       .then((res) => {
         let temp = res.data.result.result.map((item, idx) => {
@@ -68,15 +67,19 @@ const BlogList = () => {
                 >
                   <Info size={18} />
                 </Button>
-                <Button color="info" className="mx-2" onClick={() => handleEdit(item.newsId)}>
-                <Edit size={18} />
+                <Button
+                  color="info"
+                  className="mx-2"
+                  onClick={() => handleEdit(item.newsId)}
+                >
+                  <Edit size={18} />
                 </Button>
               </div>
             ),
           };
         });
         setData(temp);
-        setTotal(Math.round(res.data.result.total/size))
+        setTotal(Math.round(res.data.result.total / size));
       });
   }, [page, size]);
 
@@ -127,6 +130,7 @@ const BlogList = () => {
       {
         Header: "Actions",
         accessor: "actions",
+        width: 150,
         filterable: false,
       },
     ],

@@ -12,6 +12,14 @@ const projectSchema = new mongoose.Schema(
     urlLandingPage: {
       type: String,
     },
+    location: {
+      type: String,
+      default: null,
+    },
+    description: {
+      type: String,
+      default: null,
+    },
   },
   {
     timestamps: true,

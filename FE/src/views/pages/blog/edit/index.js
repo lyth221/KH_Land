@@ -51,26 +51,24 @@ const BlogEdit = () => {
 
     let array = string_url.split("/");
     let id = array[array.length - 1];
-    setId(id)
-    axios
-      .get("http://192.168.123.193:8080" + "/api/v1/news/" + id)
-      .then((res) => {
-        let data = res.data.result;
-        setTitle(data.title);
-        setSlug(data.subTitle);
-        setBlogCategories({
-          label: data.category,
-          value: data.category,
-        });
-        setStatus(data.active);
-        setLink(data.imageThumbnail);
-        let block_data = htmlToDraft(data.content);
-        let contentState = ContentState.createFromBlockArray(
-          block_data.contentBlocks
-        );
-        let editorState = EditorState.createWithContent(contentState);
-        setContent(editorState);
+    setId(id);
+    axios.get("http://localhost:8080" + "/api/v1/news/" + id).then((res) => {
+      let data = res.data.result;
+      setTitle(data.title);
+      setSlug(data.subTitle);
+      setBlogCategories({
+        label: data.category,
+        value: data.category,
       });
+      setStatus(data.active);
+      setLink(data.imageThumbnail);
+      let block_data = htmlToDraft(data.content);
+      let contentState = ContentState.createFromBlockArray(
+        block_data.contentBlocks
+      );
+      let editorState = EditorState.createWithContent(contentState);
+      setContent(editorState);
+    });
   }, []);
 
   const contentBlock = htmlToDraft(initialContent);
@@ -122,7 +120,7 @@ const BlogEdit = () => {
       imageThumbnail: imageLink ? imageLink : "",
     };
     axios
-      .put("http://192.168.123.193:8080" + "/api/v1/news/" + idPost, data)
+      .put("http://localhost:8080" + "/api/v1/news/" + idPost, data)
       .then((res) => {
         setAlert(
           <SweetAlert

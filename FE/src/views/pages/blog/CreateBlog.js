@@ -41,7 +41,7 @@ import { useHistory } from "react-router-dom";
 
 const BlogCreate = () => {
   const initialContent = "";
-  
+
   const history = useHistory();
 
   const contentBlock = htmlToDraft(initialContent);
@@ -53,7 +53,7 @@ const BlogCreate = () => {
   const [imageLink, setLink] = useState("");
 
   // ** States
-  const  [title, setTitle] = useState(""),
+  const [title, setTitle] = useState(""),
     [slug, setSlug] = useState(""),
     [status, setStatus] = useState(""),
     [content, setContent] = useState(editorState),
@@ -71,33 +71,30 @@ const BlogCreate = () => {
     { value: "Thông tin bên lề", label: "Thông tin bên lề" },
   ];
 
-
   const handleLoading = () => {
     setAlert(<LoadingSweet />);
   };
 
   const handleSuccess = () => {
-    history.push('/pages/blog/list')
-  }
+    history.push("/pages/blog/list");
+  };
 
   const handleCreatePost = () => {
     handleLoading();
-    console.log(content.getCurrentContent().getPlainText())
+    console.log(content.getCurrentContent().getPlainText());
     let data = {
       title: title,
       subTitle: slug,
       content: draftToHtml(convertToRaw(content.getCurrentContent())),
       owner: "Admin- Kim Hồng",
-      category: blogCategories?.value
-        ? blogCategories.value
-        : "Tất cả dự án",
+      category: blogCategories?.value ? blogCategories.value : "Tất cả dự án",
       views: 0,
       active: status ? true : false,
       project: "Nam Thăng Long",
       imageThumbnail: imageLink ? imageLink : "",
     };
     axios
-      .post("http://192.168.123.193:8080" + "/api/v1/news", data)
+      .post("http://localhost:8080" + "/api/v1/news", data)
       .then((res) => {
         setAlert(
           <SweetAlert
@@ -208,9 +205,8 @@ const BlogCreate = () => {
                       className="me-1"
                       onClick={handleCreatePost}
                     >
-                     Create new post
+                      Create new post
                     </Button>
-                   
                   </Col>
                 </Row>
               </Form>
