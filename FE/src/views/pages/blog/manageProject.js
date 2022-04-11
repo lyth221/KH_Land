@@ -64,7 +64,7 @@ const ManageProject = () => {
   const handleUpdateStatus = (e, value) => {
     e.preventDefault();
     axios
-      .put("http://localhost:8080" + `/api/v1/contact-form/${value}`)
+      .put("http://192.168.123.193:8080" + `/api/v1/contact-form/${value}`)
       .then((res) => {
         console.log("res", res.data);
         if (res.data.success == "successful") {
@@ -76,7 +76,7 @@ const ManageProject = () => {
   useEffect(() => {
     axios
       .get(
-        "http://localhost:8080" +
+        "http://192.168.123.193:8080" +
           `/api/v1/contact-form/list?page=${page}&&size=${size}`
       )
       .then((res) => {

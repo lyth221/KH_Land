@@ -94,7 +94,7 @@ const BlogCreate = () => {
       imageThumbnail: imageLink ? imageLink : "",
     };
     axios
-      .post("http://localhost:8080" + "/api/v1/news", data)
+      .post("http://192.168.123.193:8080" + "/api/v1/news", data)
       .then((res) => {
         setAlert(
           <SweetAlert
