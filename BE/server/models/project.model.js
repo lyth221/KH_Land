@@ -20,6 +20,11 @@ const projectSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    projectId: {
+      type: String,
+      required: true,
+      default: shortId.generate,
+    },
   },
   {
     timestamps: true,

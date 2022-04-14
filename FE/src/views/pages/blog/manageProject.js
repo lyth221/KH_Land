@@ -33,6 +33,11 @@ import {
 import Pagination from "./edit/Pagination";
 // ** Styles
 import "@styles/base/pages/page-blog.scss";
+import "@styles/react/libs/editor/editor.scss";
+import "@styles/base/plugins/forms/form-quill-editor.scss";
+import "@styles/react/libs/react-select/_react-select.scss";
+import LoadingSweet from "./edit/LoadingSweet";
+import SweetAlert from "react-bootstrap-sweetalert";
 import "./table.css";
 const ManageProject = () => {
   // ** States
@@ -49,9 +54,15 @@ const ManageProject = () => {
   const [description, setDescription] = useState("");
   const [projectCode, setProjectCode] = useState("");
   const [landingPageUrl, setLandingPageURL] = useState("");
+  const [alert, setAlert] = useState(null);
 
   const history = useHistory();
-
+  const hideAlert = () => {
+    setAlert(null);
+  };
+  const handleLoading = () => {
+    setAlert(<LoadingSweet />);
+  };
   const handleDetail = (id) => {
     history.push("/pages/blog/detail/" + id);
   };
@@ -59,14 +70,51 @@ const ManageProject = () => {
   const handleEdit = (id) => {
     history.push("/pages/blog/edit/" + id);
   };
+  const handleSuccess = () => {
+    history.push("/pages/blog/manageProject");
 
-  const handleCreateProject = (data) => {};
+    hideAlert();
+    window.location.reload();
+  };
+  const handleCreateProject = () => {
+    handleLoading();
+    let data = {
+      name: projectName,
+      projectCode: projectCode,
+      description: description,
+      location: location,
+      urlLandingPage: landingPageUrl,
+    };
+    axios
+      .post("http://localhost:8080" + "/api/v1/project", data)
+      .then((res) => {
+        console.log("result", res);
+        setAlert(
+          <SweetAlert
+            success
+            onConfirm={handleSuccess}
+            showCancel={false}
+            title="Create project successfull!"
+          />
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+        setAlert(
+          <SweetAlert
+            error
+            onConfirm={hideAlert}
+            showCancel={false}
+            title="Create project failure!"
+          />
+        );
+      });
+  };
   const handleUpdateStatus = (e, value) => {
     e.preventDefault();
     axios
       .put("http://localhost:8080" + `/api/v1/contact-form/${value}`)
       .then((res) => {
-        console.log("res", res.data);
         if (res.data.success == "successful") {
           window.location.reload();
         }
@@ -77,7 +125,7 @@ const ManageProject = () => {
     axios
       .get(
         "http://localhost:8080" +
-          `/api/v1/contact-form/list?page=${page}&&size=${size}`
+          `/api/v1/project/list?page=${page}&&size=${size}`
       )
       .then((res) => {
         console.log("res data", res.data.result);
@@ -132,26 +180,26 @@ const ManageProject = () => {
             Project Name
           </div>
         ),
-        accessor: "customerName",
+        accessor: "name",
         sortable: false,
       },
       {
         Header: "Description",
-        accessor: "email",
-        filterable: false,
-      },
-      {
-        Header: "Image",
-        accessor: "phoneNumber",
+        accessor: "description",
         filterable: false,
       },
       {
         Header: "Location",
-        accessor: "message",
+        accessor: "location",
         filterable: false,
       },
       {
-        Header: "Note",
+        Header: "Landing Page",
+        accessor: "urlLandingPage",
+        filterable: false,
+      },
+      {
+        Header: "Actions",
         accessor: "actions",
         width: 80,
         filterable: false,
@@ -199,6 +247,7 @@ const ManageProject = () => {
 
       return (
         <Col key={item.title} md="6">
+          {alert}
           <Card>
             <Link to={`/pages/blog/detail/${item.id}`}>
               <CardImg
@@ -270,6 +319,7 @@ const ManageProject = () => {
         breadCrumbActive="Manage"
       />
       <Row>
+        {alert}
         <Col sm="12">
           <Card>
             <CardBody>
@@ -291,8 +341,8 @@ const ManageProject = () => {
                     </Label>
                     <Input
                       id="blog-edit-title"
-                      value={projectName}
-                      onChange={(e) => setProjectName(e.target.value)}
+                      value={projectCode}
+                      onChange={(e) => setProjectCode(e.target.value)}
                     />
                   </Col>
                   <Col md="6" className="mb-2">

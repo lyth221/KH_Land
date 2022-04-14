@@ -1,9 +1,8 @@
-import newsService from "../service/news.service.js";
+import projectService from "../service/project.service.js";
 
-const createNews = async (req, res) => {
+const createProject = async (req, res) => {
   try {
-    const data = req.body;
-    const result = await newsService.createNews(data);
+    const result = await projectService.createProject(req.body);
     if (result) {
       return res.status(200).send({
         success: "successful",
@@ -26,10 +25,10 @@ const createNews = async (req, res) => {
   }
 };
 
-const getNewsById = async (req, res) => {
+const getProjectById = async (req, res) => {
   try {
     const newsId = req.params.id;
-    const newsDetails = await newsService.getNewsById(newsId);
+    const newsDetails = await projectService.getProjectById(newsId);
     if (newsDetails) {
       return res.status(200).send({
         success: "successful",
@@ -52,14 +51,13 @@ const getNewsById = async (req, res) => {
   }
 };
 
-const getListNewsByCategory = async (req, res) => {
+const getListProject = async (req, res) => {
   try {
     const params = {
       page: req.query.page || 1,
       size: req.query.size || 10,
-      category: req.query.category,
     };
-    const result = await newsService.getListNewsByCategory(params);
+    const result = await projectService.getListProject(params);
     if (result) {
       return res.status(200).send({
         success: "successful",
@@ -76,11 +74,14 @@ const getListNewsByCategory = async (req, res) => {
   }
 };
 
-const updateNewsById = async (req, res) => {
+const updateProjectById = async (req, res) => {
   try {
     const dataUpdate = req.body;
-    const newsId = req.params.id;
-    const result = await newsService.updateNewsById(newsId, dataUpdate);
+    const projectId = req.params.id;
+    const result = await projectService.updateProjectById(
+      projectId,
+      dataUpdate
+    );
     if (result) {
       return res.status(200).send({
         success: "successful",
@@ -98,8 +99,8 @@ const updateNewsById = async (req, res) => {
 };
 
 export default {
-  createNews,
-  getNewsById,
-  getListNewsByCategory,
-  updateNewsById,
+  createProject,
+  updateProjectById,
+  getListProject,
+  getProjectById,
 };

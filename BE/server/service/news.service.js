@@ -21,12 +21,22 @@ const getNewsById = async (newsId) => {
 const getListNewsByCategory = async (params) => {
   try {
     const skip = (parseInt(params.page) - 1) * parseInt(params.size);
-    const total = await newsModel.count();
-    const result = await newsModel
-      .find()
-      .skip(skip)
-      .limit(parseInt(params.size))
-      .sort({ createdAt: -1 });
+    let total = await newsModel.count();
+    let result = [];
+    if (params.category) {
+      total = await newsModel.find({ category: `${params.category}` }).count();
+      result = await newsModel
+        .find({ category: `${params.category}` })
+        .skip(skip)
+        .limit(parseInt(params.size))
+        .sort({ createdAt: -1 });
+    } else {
+      result = await newsModel
+        .find()
+        .skip(skip)
+        .limit(parseInt(params.size))
+        .sort({ createdAt: -1 });
+    }
     return {
       result,
       total,
