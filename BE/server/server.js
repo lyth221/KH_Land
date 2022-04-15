@@ -9,10 +9,37 @@ dotenv.config();
 
 const app = new Express();
 
-mongoose.connect("mongodb://localhost/KH_LAND", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+if (process.env.ENV == "production") {
+  mongoose.connect(
+    `mongodb://${config.MONGODB_USERNAME}:${config.MONGODB_PASSWORD}@wbc_mongo:27017/${config.MONGODB_DATABASE_NAME}`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    },
+    (error) => {
+      if (error) {
+        console.log("Mongodb", "WBC Connection failed!!");
+        throw error;
+      }
+      console.log("Mongodb", "WBC Mongodb connected!!!");
+    }
+  );
+} else {
+  mongoose.connect(
+    "mongodb://localhost/KH_LAND",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    },
+    (error) => {
+      if (error) {
+        console.log("Mongodb", "WBC Connection failed!!");
+        throw error;
+      }
+      console.log("Mongodb", "WBC Mongodb connected!!!");
+    }
+  );
+}
 
 app.use(morgan("dev"));
 app.use(cors());
