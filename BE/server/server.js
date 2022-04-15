@@ -11,7 +11,7 @@ const app = new Express();
 
 if (process.env.ENV == "production") {
   mongoose.connect(
-    `mongodb://${config.MONGODB_USERNAME}:${config.MONGODB_PASSWORD}@wbc_mongo:27017/${config.MONGODB_DATABASE_NAME}`,
+    `mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@khland_mongo:27017/${process.env.MONGODB_DATABASE_NAME}`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
