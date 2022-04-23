@@ -2,6 +2,7 @@ import projectModel from "../models/project.model.js";
 
 const createProject = async (data) => {
   try {
+    console.log("data create project", data);
     const result = await projectModel.create(data);
     return result;
   } catch (error) {

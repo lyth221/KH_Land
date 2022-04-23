@@ -25,6 +25,10 @@ const projectSchema = new mongoose.Schema(
       required: true,
       default: shortId.generate,
     },
+    status: {
+      type: String,
+      default: "pending",
+    },
   },
   {
     timestamps: true,

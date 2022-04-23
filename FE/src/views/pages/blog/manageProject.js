@@ -5,8 +5,10 @@ import React from "react";
 // ** Third Party Components
 import axios from "axios";
 import classnames from "classnames";
+import Select from "react-select";
 import { Edit, Info, MessageSquare, PenTool } from "react-feather";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Form } from "reactstrap";
+import { selectThemeColors } from "@utils";
 
 // ** Custom Components
 import Avatar from "@components/avatar";
@@ -54,36 +56,42 @@ const ManageProject = () => {
   const [description, setDescription] = useState("");
   const [projectCode, setProjectCode] = useState("");
   const [landingPageUrl, setLandingPageURL] = useState("");
+  const [blogCategories, setBlogCategories] = useState([]);
   const [alert, setAlert] = useState(null);
 
   const history = useHistory();
+
   const hideAlert = () => {
     setAlert(null);
   };
+
   const handleLoading = () => {
     setAlert(<LoadingSweet />);
   };
-  const handleDetail = (id) => {
-    history.push("/pages/blog/detail/" + id);
-  };
 
-  const handleEdit = (id) => {
-    history.push("/pages/blog/edit/" + id);
-  };
   const handleSuccess = () => {
     history.push("/pages/blog/manageProject");
 
     hideAlert();
     window.location.reload();
   };
+
+  const categories = [
+    { value: "pending", label: "Tạm dừng" },
+    { value: "on_sale", label: "Đang mở bán" },
+    { value: "is_coming", label: "Sắp mở bán" },
+  ];
+
   const handleCreateProject = () => {
     handleLoading();
+    const statusProject = blogCategories.values;
     let data = {
       name: projectName,
       projectCode: projectCode,
       description: description,
       location: location,
       urlLandingPage: landingPageUrl,
+      status: statusProject,
     };
     axios
       .post("http://localhost:8080" + "/api/v1/project", data)
@@ -138,13 +146,6 @@ const ManageProject = () => {
                 <Button color="success" onClick={() => isOpenModal(item)}>
                   <Info size={18} />
                 </Button>
-                {/* <Button
-                  color="info"
-                  className="mx-2"
-                  onClick={() => handleEdit(item.newsId)}
-                >
-                  <Edit size={18} />
-                </Button> */}
               </div>
             ),
           };
@@ -223,93 +224,6 @@ const ManageProject = () => {
   const isCloseModal = () => {
     setOpenModal(false);
   };
-  const handleCreatePost = () => {};
-
-  const renderRenderList = () => {
-    return data.map((item) => {
-      const renderTags = () => {
-        return item.tags.map((tag, index) => {
-          return (
-            <a key={index} href="/" onClick={(e) => e.preventDefault()}>
-              <Badge
-                className={classnames({
-                  "me-50": index !== item.tags.length - 1,
-                })}
-                color={badgeColorsArr[tag]}
-                pill
-              >
-                {tag}
-              </Badge>
-            </a>
-          );
-        });
-      };
-
-      return (
-        <Col key={item.title} md="6">
-          {alert}
-          <Card>
-            <Link to={`/pages/blog/detail/${item.id}`}>
-              <CardImg
-                className="img-fluid"
-                src={item.img}
-                alt={item.title}
-                top
-              />
-            </Link>
-            <CardBody>
-              <CardTitle tag="h4">
-                <Link
-                  className="blog-title-truncate text-body-heading"
-                  to={`/pages/blog/detail/${item.id}`}
-                >
-                  {item.title}
-                </Link>
-              </CardTitle>
-              <div className="d-flex">
-                <Avatar
-                  className="me-50"
-                  img={item.avatar}
-                  imgHeight="24"
-                  imgWidth="24"
-                />
-                <div>
-                  <small className="text-muted me-25">by</small>
-                  <small>
-                    <a
-                      className="text-body"
-                      href="/"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      {item.userFullName}
-                    </a>
-                  </small>
-                  <span className="text-muted ms-50 me-25">|</span>
-                  <small className="text-muted">{item.blogPosted}</small>
-                </div>
-              </div>
-              <div className="my-1 py-25">{renderTags()}</div>
-              <CardText className="blog-content-truncate">
-                {item.excerpt}
-              </CardText>
-              <hr />
-              <div className="d-flex justify-content-between align-items-center">
-                <Link to={`/pages/blog/detail/${item.id}`}>
-                  <MessageSquare size={15} className="text-body me-50" />
-                  <span className="text-body fw-bold">
-                    {item.comment} Comments
-                  </span>
-                </Link>
-                <Link className="fw-bold" to={`/pages/blog/detail/${item.id}`}>
-                  Read More
-                </Link>
-              </div>
-            </CardBody>
-          </Card>
-        </Col>
-      );
-    });
-  };
 
   return (
     <Fragment>
@@ -375,7 +289,22 @@ const ManageProject = () => {
                       onChange={(e) => setLandingPageURL(e.target.value)}
                     />
                   </Col>
-                  <Col md="6"></Col>
+                  <Col md="6">
+                    <Label className="form-label" for="blog-edit-title">
+                      Status
+                    </Label>
+                    <Select
+                      id="blog-edit-category"
+                      isClearable={false}
+                      theme={selectThemeColors}
+                      value={blogCategories}
+                      name="colors"
+                      options={categories}
+                      className="react-select"
+                      classNamePrefix="select"
+                      onChange={(data) => setBlogCategories(data)}
+                    />
+                  </Col>
                   <Col className="mt-50">
                     <Button
                       color="primary"
