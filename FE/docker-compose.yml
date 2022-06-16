@@ -6,7 +6,6 @@ services:
   khland_fe:
     build: .
     container_name: khland_fe
-    working_dir: /usr/src/app
     ports:
       - 127.0.0.1:3006:3006
     volumes:
