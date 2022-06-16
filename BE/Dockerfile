@@ -12,7 +12,6 @@ RUN yarn install
 COPY ./ ./
 RUN yarn build
 
-RUN yarn build
 COPY ./public ./public
 
 EXPOSE 4100 5100

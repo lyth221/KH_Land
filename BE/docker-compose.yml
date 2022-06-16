@@ -19,7 +19,7 @@ services:
     container_name: khland_server
     working_dir: /var/www
     ports:
-      - 8000:8000
+      - 8080:8080
     depends_on:
       - khland_mongo
     volumes:
