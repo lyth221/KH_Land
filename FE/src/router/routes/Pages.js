@@ -163,7 +163,7 @@ const PagesRoutes = [
     component: lazy(() => import("../../views/pages/modal-examples")),
   },
   {
-    path: "/pages/blog/list",
+    path: "/admin/pages/blog/list",
     exact: true,
     component: lazy(() => import("../../views/pages/blog/list")),
   },
@@ -189,27 +189,27 @@ const PagesRoutes = [
     },
   },
   {
-    path: "/pages/blog/create",
+    path: "/admin/pages/blog/create",
     exact: true,
     component: lazy(() => import("../../views/pages/blog/CreateBlog")),
     meta: {
-      navLink: "/pages/blog/create",
+      navLink: "/admin/pages/blog/create",
     },
   },
   {
-    path: "/pages/blog/contactForm",
+    path: "/admin/pages/blog/contactForm",
     exact: true,
     component: lazy(() => import("../../views/pages/blog/contactForm")),
     meta: {
-      navLink: "/pages/blog/contactForm",
+      navLink: "/admin/pages/blog/contactForm",
     },
   },
   {
-    path: "/pages/blog/manageProject",
+    path: "/admin/pages/blog/manageProject",
     exact: true,
     component: lazy(() => import("../../views/pages/blog/manageProject")),
     meta: {
-      navLink: "/pages/blog/contactForm",
+      navLink: "/admin/pages/blog/contactForm",
     },
   },
   {

@@ -70,7 +70,7 @@ const ManageProject = () => {
   };
 
   const handleSuccess = () => {
-    history.push("/pages/blog/manageProject");
+    history.push("/admin/pages/blog/manageProject");
 
     hideAlert();
     window.location.reload();

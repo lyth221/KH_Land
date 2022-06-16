@@ -76,7 +76,7 @@ const BlogCreate = () => {
   };
 
   const handleSuccess = () => {
-    history.push("/pages/blog/list");
+    history.push("/admin/pages/blog/list");
   };
 
   const handleCreatePost = () => {
