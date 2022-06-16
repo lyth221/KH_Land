@@ -52,7 +52,7 @@ const BlogEdit = () => {
     let array = string_url.split("/");
     let id = array[array.length - 1];
     setId(id);
-    axios.get("http://localhost:8080" + "/api/v1/news/" + id).then((res) => {
+    axios.get("https://kimhongbds.com" + "/api/v1/news/" + id).then((res) => {
       let data = res.data.result;
       setTitle(data.title);
       setSlug(data.subTitle);
@@ -120,7 +120,7 @@ const BlogEdit = () => {
       imageThumbnail: imageLink ? imageLink : "",
     };
     axios
-      .put("http://localhost:8080" + "/api/v1/news/" + idPost, data)
+      .put("https://kimhongbds.com" + "/api/v1/news/" + idPost, data)
       .then((res) => {
         setAlert(
           <SweetAlert

@@ -94,7 +94,7 @@ const ManageProject = () => {
       status: statusProject,
     };
     axios
-      .post("http://localhost:8080" + "/api/v1/project", data)
+      .post("https://kimhongbds.com" + "/api/v1/project", data)
       .then((res) => {
         console.log("result", res);
         setAlert(
@@ -121,7 +121,7 @@ const ManageProject = () => {
   const handleUpdateStatus = (e, value) => {
     e.preventDefault();
     axios
-      .put("http://localhost:8080" + `/api/v1/contact-form/${value}`)
+      .put("https://kimhongbds.com" + `/api/v1/contact-form/${value}`)
       .then((res) => {
         if (res.data.success == "successful") {
           window.location.reload();
@@ -132,7 +132,7 @@ const ManageProject = () => {
   useEffect(() => {
     axios
       .get(
-        "http://localhost:8080" +
+        "https://kimhongbds.com" +
           `/api/v1/project/list?page=${page}&&size=${size}`
       )
       .then((res) => {

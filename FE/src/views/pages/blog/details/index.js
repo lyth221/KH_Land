@@ -65,7 +65,7 @@ const BlogDetails = () => {
     let array = string_url.split("/");
     let id = array[array.length - 1];
 
-    axios.get("http://localhost:8080" + "/api/v1/news/" + id).then((res) => {
+    axios.get("https://kimhongbds.com" + "/api/v1/news/" + id).then((res) => {
       setData(res.data.result);
     });
   }, []);

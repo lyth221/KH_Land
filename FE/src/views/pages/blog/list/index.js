@@ -52,7 +52,8 @@ const BlogList = () => {
   useEffect(() => {
     axios
       .get(
-        "http://localhost:8080" + `/api/v1/news/list?page=${page}&&size=${size}`
+        "https://kimhongbds.com" +
+          `/api/v1/news/list?page=${page}&&size=${size}`
       )
       .then((res) => {
         let temp = res.data.result.result.map((item, idx) => {
