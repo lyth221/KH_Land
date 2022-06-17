@@ -163,7 +163,7 @@ const PagesRoutes = [
     component: lazy(() => import("../../views/pages/modal-examples")),
   },
   {
-    path: "/admin/pages/blog/list",
+    path: "/admin",
     exact: true,
     component: lazy(() => import("../../views/pages/blog/list")),
   },
